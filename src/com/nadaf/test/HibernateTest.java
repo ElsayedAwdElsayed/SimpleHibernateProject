@@ -28,8 +28,15 @@ public class HibernateTest {
         Session session=sessionFactory.openSession();
         trancaction=session.beginTransaction(); //to define single unit of voke 
         session.save(user);
-        trancaction.commit();        
-        }catch(Exception ex)
+        trancaction.commit();
+        session.close();
+        session=sessionFactory.openSession();
+        trancaction=session.beginTransaction();
+        UserDetails  userDetails=(UserDetails) session.get(UserDetails.class,1);
+        System.out.println("UserName is ------- "+userDetails.getUserName());
+     //   session.close();
+       
+         }catch(Exception ex)
         {
             ex.printStackTrace();
             //trancaction.rollback();
