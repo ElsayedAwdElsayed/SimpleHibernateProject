@@ -8,16 +8,21 @@ package com.nadaf.models;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
  *
  * @author elsayedawd
  */
-@Entity (name = "User_Details")
+@Entity   
+@Table (name = "User_Details")
 public class UserDetails implements Serializable {  
-    
+//to make the id is auto generated well and you should    
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
    
     private String userName;
@@ -27,8 +32,8 @@ public class UserDetails implements Serializable {
         
         
     }
-    @Id 
-    @Column (name = "user_Id")
+   
+   
     public int getUserId() {
         return userId;
     }
@@ -37,7 +42,6 @@ public class UserDetails implements Serializable {
         this.userId = userId;
     }
     
-     @Column (name = "user_Name")
     public String getUserName() {
         return userName +"from getter";
     }

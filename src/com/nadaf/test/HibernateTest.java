@@ -21,19 +21,26 @@ public class HibernateTest {
         
         org.hibernate.Transaction trancaction=null;
         try{
-        UserDetails user=new UserDetails();
-        user.setUserId(2);
-        user.setUserName("Elsayed Awd");
+            
+        //test to insert without specifing the id the id is  outoincremented by hibernate it selff 
+        UserDetails user1=new UserDetails();
+        user1.setUserName("Elsayed Awd");
+        
+        UserDetails user2=new UserDetails();
+        user2.setUserName("Elsayed Awd");
+        
         SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
         Session session=sessionFactory.openSession();
         trancaction=session.beginTransaction(); //to define single unit of voke 
-        session.save(user);
+        session.save(user1);
+        session.save(user2);
         trancaction.commit();
         session.close();
-        session=sessionFactory.openSession();
-        trancaction=session.beginTransaction();
-        UserDetails  userDetails=(UserDetails) session.get(UserDetails.class,1);
-        System.out.println("UserName is ------- "+userDetails.getUserName());
+        //to retrieve   user from Session 
+//        session=sessionFactory.openSession();
+//        trancaction=session.beginTransaction();
+//        UserDetails  userDetails=(UserDetails) session.get(UserDetails.class,1);
+//        System.out.println("UserName is ------- "+userDetails.getUserName());
      //   session.close();
        
          }catch(Exception ex)
