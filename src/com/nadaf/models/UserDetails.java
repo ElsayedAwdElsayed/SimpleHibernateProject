@@ -7,6 +7,7 @@ package com.nadaf.models;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,12 @@ public class UserDetails implements Serializable {
 //to make the id is auto generated well and you should    
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
-   
+    
     private String userName;
   
+    @Embedded   //you must make that because it defined the Address class as Embedable sure 
+    private Address  address;
+    
     public UserDetails()
     {
         
@@ -49,5 +53,14 @@ public class UserDetails implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
     
 }

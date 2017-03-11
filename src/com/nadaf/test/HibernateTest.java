@@ -5,6 +5,7 @@
  */
 package com.nadaf.test;
 
+import com.nadaf.models.Address;
 import com.nadaf.models.UserDetails;
 import javax.transaction.Transaction;
 import org.hibernate.Session;
@@ -25,15 +26,20 @@ public class HibernateTest {
         //test to insert without specifing the id the id is  outoincremented by hibernate it selff 
         UserDetails user1=new UserDetails();
         user1.setUserName("Elsayed Awd");
-        
-        UserDetails user2=new UserDetails();
-        user2.setUserName("Elsayed Awd");
+        Address addr=new Address();  //setting th embeded Object in the User Class
+        addr.setCity("london");
+        addr.setStreet("Chevening");
+        addr.setState("librah");
+        addr.setPinCode("2545");
+        user1.setAddress(addr);
+        //UserDetails user2=new UserDetails();
+        //user2.setUserName("Elsayed Awd");
         
         SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
         Session session=sessionFactory.openSession();
         trancaction=session.beginTransaction(); //to define single unit of voke 
         session.save(user1);
-        session.save(user2);
+        //session.save(user2);
         trancaction.commit();
         session.close();
         //to retrieve   user from Session 
