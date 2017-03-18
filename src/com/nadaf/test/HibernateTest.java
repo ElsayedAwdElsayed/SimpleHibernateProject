@@ -26,12 +26,19 @@ public class HibernateTest {
         //test to insert without specifing the id the id is  outoincremented by hibernate it selff 
         UserDetails user1=new UserDetails();
         user1.setUserName("Elsayed Awd");
-        Address addr=new Address();  //setting th embeded Object in the User Class
-        addr.setCity("london");
-        addr.setStreet("Chevening");
-        addr.setState("librah");
-        addr.setPinCode("2545");
-        user1.setAddress(addr);
+        Address homeAddress=new Address();  //setting th embeded Object in the User Class
+        homeAddress.setCity("london");
+        homeAddress.setStreet("Chevening");   //in this case we set two embeded objects, one of these objects
+                                              //is configured by OverrideAttributes and the other is set by defautl
+        homeAddress.setState("librah");
+        homeAddress.setPinCode("2545");
+        user1.setHomeAddress(homeAddress);
+        Address officeAddress=new Address();  //setting th embeded Object in the User Class
+        officeAddress.setCity("lifrpool");
+        officeAddress.setStreet("universtiy");
+        officeAddress.setState("denbrue");
+        officeAddress.setPinCode("784");
+        user1.setOfficeAddress(officeAddress);
         //UserDetails user2=new UserDetails();
         //user2.setUserName("Elsayed Awd");
         
