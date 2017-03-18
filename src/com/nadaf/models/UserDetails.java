@@ -10,6 +10,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +26,10 @@ import javax.persistence.Table;
 @Table (name = "User_Details")
 public class UserDetails implements Serializable {  
 //to make the id is auto generated well and you should    
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
-    
+//    @Id @GeneratedValue(strategy = GenerationType.AUTO)  
+//    private int userId;    //these two staments are replaced by LoginName 
+    @EmbeddedId     //we will make the combination of attributes makes the Id of the  user details
+    private LoginName userId;
     private String userName;
   
     @Embedded   //you must make that because it defined the Address class as Embedable sure 
@@ -51,11 +53,11 @@ public class UserDetails implements Serializable {
     }
    
    
-    public int getUserId() {
+    public LoginName getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(LoginName userId) {
         this.userId = userId;
     }
     
