@@ -6,6 +6,8 @@
 package com.nadaf.models;
 
 import java.io.Serializable;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -29,7 +31,18 @@ public class UserDetails implements Serializable {
     private String userName;
   
     @Embedded   //you must make that because it defined the Address class as Embedable sure 
-    private Address  address;
+    @AttributeOverrides({  //to reconfigure the columns names to insert it in database to 
+                           //make sure of that there isn't any thing that not being dublicated .
+    @AttributeOverride(name = "city",column = @Column(name = "myCityName")),
+    @AttributeOverride(name = "street",column = @Column(name = "myStreetName")),
+    @AttributeOverride(name = "state",column = @Column(name = "myStateName")),
+    @AttributeOverride(name = "pinCode",column = @Column(name = "myPinCode"))})
+    private Address  homeAddress;
+    
+    @Embedded
+    private Address  officeAddress; //I will keep that by default and reconfigure the other .
+ 
+    
     
     public UserDetails()
     {
@@ -54,13 +67,22 @@ public class UserDetails implements Serializable {
         this.userName = userName;
     }
 
-    public Address getAddress() {
-        return address;
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
+
+    public Address getOfficeAddress() {
+        return officeAddress;
+    }
+
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
+    }
+    
     
     
 }
